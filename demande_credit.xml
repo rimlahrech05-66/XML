@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Fichier XML : demande_credit.xml
+  Rôle : Décrire une demande de prêt avec toutes ses données structurées.
+  Chaque balise correspond à une information sur l'emprunteur ou le prêt.
+-->
+<demande_credit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="demande_credit.xsd">
+
+  <!-- Informations sur l'emprunteur -->
+  <emprunteur>
+    <nom>Adraoui</nom>
+    <prenom>Ihab</prenom>
+    <age>22</age>
+    <revenu_mensuel>8500</revenu_mensuel> <!-- En MAD -->
+  </emprunteur>
+
+  <!-- Conditions du prêt -->
+  <pret>
+    <montant>120000</montant>       <!-- Montant emprunté en MAD, doit être > 0 -->
+    <taux_annuel>6.5</taux_annuel>  <!-- Taux d'intérêt annuel en %, doit être <= 20 -->
+    <duree_annees>10</duree_annees> <!-- Durée en années, doit être <= 30 -->
+    <type>Immobilier</type>
+  </pret>
+
+</demande_credit>

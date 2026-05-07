@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Fichier XSD : demande_credit.xsd
+  Rôle : Valider la structure et les contraintes du fichier XML.
+  Les restrictions (minExclusive, maxInclusive) appliquent les règles métier.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Élément racine -->
+  <xs:element name="demande_credit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="emprunteur" type="TypeEmprunteur"/>
+        <xs:element name="pret"       type="TypePret"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ===== Type : Emprunteur ===== -->
+  <xs:complexType name="TypeEmprunteur">
+    <xs:sequence>
+      <xs:element name="nom"            type="xs:string"/>
+      <xs:element name="prenom"         type="xs:string"/>
+      <xs:element name="age"            type="xs:positiveInteger"/>
+      <xs:element name="revenu_mensuel" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ===== Type : Prêt ===== -->
+  <xs:complexType name="TypePret">
+    <xs:sequence>
+
+      <!-- Montant : strictement positif -->
+      <xs:element name="montant">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minExclusive value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+
+      <!-- Taux annuel : entre 0 et 20 % inclus -->
+      <xs:element name="taux_annuel">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal">
+            <xs:minExclusive value="0"/>
+            <xs:maxInclusive value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+
+      <!-- Durée : entre 1 et 30 ans inclus -->
+      <xs:element name="duree_annees">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+
+      <xs:element name="type" type="xs:string"/>
+
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
